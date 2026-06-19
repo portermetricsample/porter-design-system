@@ -1,0 +1,12 @@
+{
+  "pkg": "@porter/design-system",
+  "globalName": "PorterDS",
+  "shape": "package",
+  "buildCmd": "npm run build",
+  "cssEntry": "dist/porter.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "Card": { "cardMode": "column" },
+    "Heading": { "cardMode": "column" }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@porter/design-system",
+  "version": "0.1.0",
+  "description": "Porter Metrics design system (Koho-inspired) — brand kit components.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "module": "dist/index.es.js",
+  "main": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js"
+    },
+    "./styles.css": "./dist/porter.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.4"
+  }
+}
