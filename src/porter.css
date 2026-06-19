@@ -3,7 +3,7 @@
    Tokens + component classes. Source of truth for color/type lives here.
    ============================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* ━━━━━━━━ CORE ━━━━━━━━ */
@@ -49,8 +49,14 @@
   --neutral-950: #0a0a0a;
 
   /* ━━━━━━━━ TYPOGRAPHY ━━━━━━━━ */
+  /* DEFAULT pairing (unchanged): Inter display + IBM Plex Mono accents. */
   --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-alt: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* ALTERNATE faces (opt in via the .pds-editorial theme below, or use
+     these tokens directly). Both are modern grotesques. */
+  --font-bricolage: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif; /* expressive display: headings, cover titles, KPI numbers, chart titles (600–800) */
+  --font-hanken: 'Hanken Grotesk', -apple-system, system-ui, sans-serif;   /* quiet workhorse: body, labels, table data, captions (400–600) */
 
   /* ━━━━━━━━ SPACING ━━━━━━━━ */
   /* Porter uses generous whitespace: 96px+ on full slides, 120px+ on hero. */
@@ -71,6 +77,19 @@
   --radius-lg:   14px;
   --radius-card: 20px;
   --radius-pill: 999px;
+}
+
+/* ============================================================================
+   EDITORIAL THEME (optional pairing — does NOT change the default)
+   Wrap any subtree in class="pds-editorial" to switch from the default
+   Inter + IBM Plex Mono pairing to Bricolage Grotesque (display) +
+   Hanken Grotesk (body/labels). No monospace. Because every component reads
+   --font-display / --font-alt, this one class re-skins the whole kit.
+   ============================================================================ */
+.pds-editorial {
+  --font-display: var(--font-bricolage);
+  --font-alt: var(--font-hanken);
+  font-family: var(--font-hanken);
 }
 
 /* ============================================================================

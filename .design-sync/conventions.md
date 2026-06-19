@@ -33,8 +33,21 @@ CSS custom properties directly — never hard-code hexes:
 `--porter-purple #6701e6` (primary) · `--porter-dark #1a0340` · `--porter-pink`
 · `--porter-aqua` · `--porter-yellow` · `--porter-cream` · `--porter-muted`
 (secondary text). Scales exist too: `--purple-100..950`, `--pink-100..700`,
-`--aqua-100..700`. Fonts: `--font-display` (Inter, headlines/body) and
-`--font-alt` (IBM Plex Mono, eyebrows/tags/meta).
+`--aqua-100..700`. Spacing: `--space-1..30` (4–120px). Radius: `--radius-sm/md/lg/card/pill`.
+
+## Typography — two pairings
+
+**Default pairing** (no wrapper needed): `--font-display` (Inter, headlines/body)
++ `--font-alt` (IBM Plex Mono, eyebrows/tags/meta).
+
+**Editorial pairing** (opt in): wrap any subtree in `class="pds-editorial"` and
+the whole kit re-skins to two modern grotesques — `--font-bricolage`
+(**Bricolage Grotesque**, expressive display: headings, cover titles, KPI
+numbers, chart titles, weights 600–800) for `--font-display`, and `--font-hanken`
+(**Hanken Grotesk**, quiet workhorse: body, labels, table data, captions, weights
+400–600) for `--font-alt`. No monospace in this pairing. You can also use the
+`--font-bricolage` / `--font-hanken` tokens directly without the wrapper.
+All four faces ship — pick per piece.
 
 ## Rules (from the Porter principles)
 

@@ -29,7 +29,31 @@ import { Button, Card, Badge, Eyebrow, Heading } from "@porter/design-system";
 <Heading level="display">Report<br/><strong>faster</strong></Heading>
 ```
 
+## Typography
+
+Two pairings ship; the default needs no setup:
+
+- **Default:** Inter (`--font-display`) + IBM Plex Mono (`--font-alt`).
+- **Editorial (opt in):** wrap a subtree in `class="pds-editorial"` to swap to
+  **Bricolage Grotesque** (display — headings, cover titles, KPI numbers, chart
+  titles) + **Hanken Grotesk** (body, labels, table data, captions). No mono.
+  Tokens `--font-bricolage` / `--font-hanken` are also usable directly.
+
+```tsx
+<div className="pds-editorial">
+  <Heading level="display">Report faster</Heading>   {/* Bricolage */}
+  <p>Body copy renders in Hanken Grotesk.</p>
+</div>
+```
+
 ## Tokens
 
-Colors and fonts live in `dist/porter.css` as CSS custom properties
-(`--porter-purple`, `--porter-pink`, `--porter-aqua`, `--font-display`, …).
+Colors, fonts, spacing (`--space-*`) and radius (`--radius-*`) live in
+`dist/porter.css` as CSS custom properties (`--porter-purple`, `--font-display`,
+`--font-bricolage`, `--font-hanken`, …).
+
+## Brand assets
+
+`assets/brand/` (Porter mark, wordmark, icon, horizontal lockup) and
+`assets/connectors/` (Meta, Google Ads, GA4, Search Console, HubSpot, Shopify,
+Instagram, Google Sheets, WordPress…).
