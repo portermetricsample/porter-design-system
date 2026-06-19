@@ -51,6 +51,26 @@
   /* ━━━━━━━━ TYPOGRAPHY ━━━━━━━━ */
   --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-alt: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* ━━━━━━━━ SPACING ━━━━━━━━ */
+  /* Porter uses generous whitespace: 96px+ on full slides, 120px+ on hero. */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;   /* full-slide padding */
+  --space-30: 120px;  /* hero / landing section padding */
+
+  /* ━━━━━━━━ RADIUS ━━━━━━━━ */
+  --radius-sm:   10px;
+  --radius-md:   12px;
+  --radius-lg:   14px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
 }
 
 /* ============================================================================
