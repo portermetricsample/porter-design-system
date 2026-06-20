@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistema de Diseño — Porter</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--porter-cream); font-family:var(--font-hanken); color:var(--porter-dark); }
+  .wrap { max-width:1040px; margin:0 auto; padding:40px 20px 90px; }
+  .cover { background:var(--porter-dark); color:#fff; border-radius:24px; padding:48px 52px; margin-bottom:30px; }
+  .eyebrow { font-family:var(--font-hanken); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--porter-yellow); display:block; margin-bottom:16px; }
+  h1 { font-family:var(--font-bricolage); font-weight:800; font-size:52px; line-height:0.98; letter-spacing:-1.5px; margin:0; }
+  .cover p { font-size:17px; line-height:1.55; color:rgba(255,255,255,0.7); max-width:64ch; margin:18px 0 0; }
+  .legend { display:flex; flex-wrap:wrap; gap:18px; margin-top:26px; font-family:var(--font-hanken); font-size:13px; }
+  .legend span { display:flex; align-items:center; gap:8px; color:rgba(255,255,255,0.8); }
+  .sw { width:15px; height:15px; border-radius:5px; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25); }
+  .grouptitle { font-family:var(--font-bricolage); font-weight:700; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--jewel); margin:34px 0 14px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .card { display:block; text-decoration:none; color:inherit; background:#fff; border-radius:16px; padding:22px 24px; box-shadow:inset 0 0 0 1px var(--neutral-200); transition:box-shadow .12s, transform .12s; }
+  .card:hover { box-shadow:inset 0 0 0 2px var(--porter-purple); transform:translateY(-2px); }
+  .card.white { background:#fff; box-shadow:inset 0 0 0 1px #e5e7eb; }
+  .card.dark { background:#100225; color:#fff; box-shadow:none; }
+  .card.morado { background:#1B0E36; color:#FFF8EC; box-shadow:none; }
+  .card.dark:hover, .card.morado:hover { box-shadow:inset 0 0 0 2px var(--purple-500); }
+  .card h3 { font-family:var(--font-bricolage); font-weight:700; font-size:18px; letter-spacing:-0.3px; margin:0 0 5px; }
+  .card p { font-size:13px; line-height:1.45; color:var(--ink-mute); margin:0; }
+  .card.dark p, .card.morado p { color:rgba(255,255,255,0.55); }
+  .tag { display:inline-block; font-family:var(--font-hanken); font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:999px; margin-bottom:9px; }
+  .t-crema { background:var(--porter-cream); color:#8a7a5a; box-shadow:inset 0 0 0 1px #e7ddc8; }
+  .t-blanco { background:#f3f4f6; color:#6b7280; }
+  .t-azul { background:rgba(139,92,246,0.22); color:#c4b5fd; }
+  .t-morado { background:rgba(138,95,192,0.30); color:#d9c8f5; }
+  .note { font-size:12px; color:var(--ink-mute); margin:14px 0 0; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cover">
+      <span class="eyebrow">Porter Report System</span>
+      <h1>Todas las vistas,<br>un solo lugar</h1>
+      <p>Plantillas vivas del sistema en Bricolage Grotesque + Hanken Grotesk. Cada referente existe (o existirá) en cuatro temas. Haz clic para abrir.</p>
+      <div class="legend">
+        <span><span class="sw" style="background:#fdf8f0;"></span>Crema (light)</span>
+        <span><span class="sw" style="background:#ffffff;"></span>Blanco (light)</span>
+        <span><span class="sw" style="background:#100225;"></span>Azul oscuro (dark)</span>
+        <span><span class="sw" style="background:#1B0E36;"></span>Morado (dark)</span>
+      </div>
+    </div>
+
+    <div class="grouptitle">Gráficas &amp; visualizaciones — Building Blocks</div>
+    <div class="grid">
+      <a class="card" href="templates/report-blocks-type/ReportBlocksType.dc.html"><span class="tag t-crema">Crema</span><h3>Building Blocks</h3><p>Series, scorecards, mapa, conditional formatting, pivot, waterfall, funnel, KPIs — con iconos, Δ% y tooltips.</p></a>
+      <a class="card white" href="templates/report-blocks-white/ReportBlocksWhite.dc.html"><span class="tag t-blanco">Blanco</span><h3>Building Blocks</h3><p>La librería completa sobre fondo blanco puro.</p></a>
+      <a class="card dark" href="templates/report-blocks-type-dark/ReportBlocksTypeDark.dc.html"><span class="tag t-azul">Azul oscuro</span><h3>Building Blocks</h3><p>Sobre fondo azul profundo (#100225).</p></a>
+      <a class="card morado" href="templates/report-blocks-morado-dark/ReportBlocksMoradoDark.dc.html"><span class="tag t-morado">Morado</span><h3>Building Blocks</h3><p>Tema morado profundo (#1B0E36), tinta crema/lavanda, deltas verdes.</p></a>
+    </div>
+
+    <div class="grouptitle">Bloques de texto — Text Blocks</div>
+    <div class="grid">
+      <a class="card" href="templates/report-text-blocks-type/ReportTextBlocksType.dc.html"><span class="tag t-crema">Crema</span><h3>Text Blocks</h3><p>Portada, divisores de color, títulos, body, takeaways, quotes, callouts, inline emphasis.</p></a>
+      <a class="card white" href="templates/report-text-blocks-white/ReportTextBlocksWhite.dc.html"><span class="tag t-blanco">Blanco</span><h3>Text Blocks</h3><p>Los mismos bloques editoriales sobre blanco.</p></a>
+      <a class="card dark" href="templates/report-text-blocks-type-dark/ReportTextBlocksTypeDark.dc.html"><span class="tag t-azul">Azul oscuro</span><h3>Text Blocks</h3><p>Editorial sobre fondo azul profundo.</p></a>
+      <a class="card morado" href="templates/report-text-blocks-morado-dark/ReportTextBlocksMoradoDark.dc.html"><span class="tag t-morado">Morado</span><h3>Text Blocks</h3><p>Editorial sobre el tema morado profundo.</p></a>
+    </div>
+
+    <div class="grouptitle">Presentaciones — Slides / PowerPoint</div>
+    <div class="grid">
+      <a class="card" href="templates/report-slides-type/ReportSlidesType.dc.html"><span class="tag t-crema">Crema</span><h3>Slides Deck</h3><p>Deck 16:9: título, agenda, divisor, KPIs, gráfica, comparación, dato destacado, cierre.</p></a>
+      <a class="card white" href="templates/report-slides-white/ReportSlidesWhite.dc.html"><span class="tag t-blanco">Blanco</span><h3>Slides Deck</h3><p>El mismo deck sobre fondo blanco.</p></a>
+      <a class="card dark" href="templates/report-slides-azul/ReportSlidesAzul.dc.html"><span class="tag t-azul">Azul oscuro</span><h3>Slides Deck</h3><p>El deck sobre fondo azul profundo.</p></a>
+      <a class="card morado" href="templates/report-slides-type-dark/ReportSlidesTypeDark.dc.html"><span class="tag t-morado">Morado</span><h3>Slides Deck</h3><p>El deck en el tema morado profundo.</p></a>
+    </div>
+
+    <div class="grouptitle">Dashboards</div>
+    <div class="grid">
+      <a class="card" href="templates/marketing-dashboard-type/MarketingDashboardType.dc.html"><span class="tag t-crema">Crema</span><h3>Marketing Dashboard</h3><p>KPI tiles, spend trend, breakdown por canal y tabla de campañas.</p></a>
+      <a class="card white" href="templates/marketing-dashboard-white/MarketingDashboardWhite.dc.html"><span class="tag t-blanco">Blanco</span><h3>Marketing Dashboard</h3><p>El dashboard sobre fondo blanco.</p></a>
+      <a class="card dark" href="templates/marketing-dashboard-azul/MarketingDashboardAzul.dc.html"><span class="tag t-azul">Azul oscuro</span><h3>Marketing Dashboard</h3><p>Sobre fondo azul profundo.</p></a>
+      <a class="card morado" href="templates/marketing-dashboard-morado/MarketingDashboardMorado.dc.html"><span class="tag t-morado">Morado</span><h3>Marketing Dashboard</h3><p>Sobre el tema morado profundo.</p></a>
+    </div>
+
+    <div class="grouptitle">Reporte ejecutivo</div>
+    <div class="grid">
+      <a class="card" href="templates/executive-report-type/ExecutiveReportType.dc.html"><span class="tag t-crema">Crema</span><h3>Executive Report</h3><p>Reporte ejecutivo multi-sección para presentar.</p></a>
+      <a class="card white" href="templates/executive-report-white/ExecutiveReportWhite.dc.html"><span class="tag t-blanco">Blanco</span><h3>Executive Report</h3><p>El reporte ejecutivo sobre fondo blanco.</p></a>
+      <a class="card dark" href="templates/executive-report-azul/ExecutiveReportAzul.dc.html"><span class="tag t-azul">Azul oscuro</span><h3>Executive Report</h3><p>El reporte sobre fondo azul profundo.</p></a>
+      <a class="card morado" href="templates/executive-report-morado/ExecutiveReportMorado.dc.html"><span class="tag t-morado">Morado</span><h3>Executive Report</h3><p>El reporte sobre el tema morado profundo.</p></a>
+    </div>
+
+    <p class="note">Matriz completa: Building Blocks, Text Blocks, Slides, Dashboard y Executive Report en crema · blanco · azul · morado. Todo en Bricolage Grotesque + Hanken Grotesk.</p>
+  </div>
+</body>
+</html>

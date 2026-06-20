@@ -1,0 +1,53 @@
+/* ============================================================================
+   Porter Metrics — Typography tokens
+   Inter is the protagonist (headlines + body). IBM Plex Mono for eyebrows,
+   badges and meta. Fonts load from Google Fonts at runtime (not self-hosted).
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ━━━━━━━━ FAMILIES ━━━━━━━━ */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-alt:     'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  /* Refresh pairing — Bricolage (display/headings) + Hanken (body) */
+  --font-bricolage: 'Bricolage Grotesque', 'Inter', sans-serif;
+  --font-hanken:    'Hanken Grotesk', 'Inter', sans-serif;
+
+  /* ━━━━━━━━ WEIGHTS ━━━━━━━━ */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+  --weight-heavy:   800;
+  --weight-black:   900;
+
+  /* ━━━━━━━━ DISPLAY SCALE (tight, heavy, uppercase covers) ━━━━━━━━ */
+  --type-display-size: clamp(72px, 10vw, 140px);
+  --type-display-weight: 900;
+  --type-display-leading: 0.9;
+  --type-display-tracking: -4px;
+
+  --type-h1-size: clamp(48px, 6vw, 88px);
+  --type-h1-weight: 800;
+  --type-h1-leading: 0.95;
+  --type-h1-tracking: -2.5px;
+
+  --type-h2-size: clamp(32px, 4vw, 56px);
+  --type-h2-weight: 800;
+  --type-h2-leading: 1;
+  --type-h2-tracking: -1.5px;
+
+  /* ━━━━━━━━ BODY + META ━━━━━━━━ */
+  --type-body-size: 18px;
+  --type-body-leading: 1.55;
+  --type-small-size: 15px;
+
+  --type-eyebrow-size: 14px;
+  --type-eyebrow-tracking: 2px;
+  --type-badge-size: 12px;
+  --type-badge-tracking: 1.5px;
+}

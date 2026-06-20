@@ -1,0 +1,183 @@
+/* ============================================================================
+   Porter Metrics — Component classes (.pds-*)
+   Consumed by the React primitives. Solid colors, no shadows, zero decoration.
+   ============================================================================ */
+
+/* ── BUTTON ───────────────────────────────────────────────────────────── */
+.pds-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+.pds-btn:active { transform: translateY(1px); }
+.pds-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.pds-btn--sm { font-size: 14px; padding: 10px 18px; border-radius: var(--radius-sm); }
+.pds-btn--md { font-size: 16px; padding: 14px 26px; }
+.pds-btn--lg { font-size: 19px; padding: 18px 34px; border-radius: var(--radius-lg); }
+
+.pds-btn--purple  { background: var(--porter-purple); color: #fff; }
+.pds-btn--pink    { background: var(--porter-pink);   color: #fff; }
+.pds-btn--aqua    { background: var(--porter-aqua);   color: var(--porter-dark); }
+.pds-btn--yellow  { background: var(--porter-yellow); color: var(--porter-dark); }
+.pds-btn--dark    { background: var(--porter-dark);   color: #fff; }
+.pds-btn--outline {
+  background: transparent;
+  color: var(--btn-outline, var(--porter-purple));
+  box-shadow: inset 0 0 0 2px var(--btn-outline, var(--porter-purple));
+}
+
+/* ── CARD ─────────────────────────────────────────────────────────────── */
+.pds-card {
+  font-family: var(--font-display);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  background: var(--porter-white);
+  color: var(--porter-black);
+}
+.pds-card--cream    { background: var(--porter-cream); }
+.pds-card--lavender { background: var(--purple-100); }
+.pds-card--dark     { background: var(--porter-dark); color: #fff; }
+.pds-card--purple   { background: var(--porter-purple); color: #fff; }
+.pds-card--bordered { box-shadow: inset 0 0 0 1px var(--border-hairline); }
+
+/* ── BADGE ────────────────────────────────────────────────────────────── */
+.pds-badge {
+  font-family: var(--font-alt);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.pds-badge--purple { background: var(--purple-100); color: var(--porter-purple); }
+.pds-badge--pink   { background: var(--pink-100);   color: var(--pink-700); }
+.pds-badge--aqua   { background: var(--aqua-100);   color: var(--aqua-700); }
+.pds-badge--yellow { background: var(--yellow-100); color: #92400e; }
+.pds-badge--dark   { background: var(--porter-dark); color: #fff; }
+
+/* ── INLINE TEXT (metric chips / highlight / underline) ───────────────────
+   Editorial emphasis inside running copy. Theme-aware: chips reuse the delta
+   tokens so "good/bad" reads the same as the pills in tables & scorecards. */
+.pds-chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-family: var(--font-alt); font-weight: 700;
+  font-size: 0.78em; letter-spacing: 0.01em;
+  padding: 2px 9px; border-radius: var(--radius-pill);
+  line-height: 1.5; vertical-align: baseline; white-space: nowrap;
+}
+.pds-chip--pos     { color: var(--delta-up);   background: color-mix(in srgb, var(--delta-up) 15%, transparent); }
+.pds-chip--neg     { color: var(--delta-down); background: color-mix(in srgb, var(--delta-down) 15%, transparent); }
+.pds-chip--neutral { color: var(--chip-text);  background: var(--chip-bg); }
+.pds-chip--brand   { color: #fff;              background: var(--series-meta); }
+.pds-hl {
+  background: color-mix(in srgb, var(--highlight-fill) 32%, transparent);
+  padding: 0 3px; border-radius: 3px;
+  font-weight: 600; color: var(--text-title);
+}
+.pds-u {
+  text-decoration: underline; text-decoration-color: var(--porter-aqua-300, #5eead4);
+  text-decoration-thickness: 3px; text-underline-offset: 3px;
+  font-weight: 600; color: var(--text-title);
+}
+
+/* ── TOOLTIP (hover popover for chart points) ─────────────────────────────
+   Put `.pds-hotspot` on the point wrapper and a `.pds-tooltip` inside it.
+   Reuses --tip-* theme tokens (dark on light themes, elevated on dark). */
+.pds-hotspot { position: relative; }
+.pds-tooltip {
+  position: absolute; left: 50%; bottom: calc(100% + 12px);
+  transform: translateX(-50%);
+  background: var(--tip-bg); color: var(--tip-text);
+  box-shadow: inset 0 0 0 1px var(--tip-border, transparent);
+  font-family: var(--font-alt);
+  padding: 9px 12px; border-radius: 9px; white-space: nowrap;
+  display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; pointer-events: none; transition: opacity 0.12s ease; z-index: 5;
+}
+.pds-tooltip::after {
+  content: ""; position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--tip-bg);
+}
+.pds-tooltip__date { font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.72; }
+.pds-tooltip__val  { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.pds-hotspot:hover .pds-tooltip,
+.pds-tooltip--show { opacity: 1; }
+
+/* ── TABLE TAG / IN-CELL CHIP ─────────────────────────────────────────────
+   A chip used inside table cells (campaign names, match types, labels). */
+.pds-tag {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-alt); font-weight: 600; font-size: 0.85em; letter-spacing: 0.01em;
+  background: var(--chip-bg); color: var(--chip-text);
+  padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+}
+
+/* ── STAT CARD (tinted) ───────────────────────────────────────────────────
+   Tinted KPI/creative card. Theme-aware so it has presence on light AND dark
+   (light = defined lavender border + faint fill; dark = translucent accent). */
+.pds-stat-card {
+  background: var(--stat-bg);
+  box-shadow: inset 0 0 0 1px var(--stat-border);
+  border-radius: var(--radius-lg); padding: 16px 18px;
+}
+
+/* ── SCORECARD (rhythm) ───────────────────────────────────────────────────
+   Fixed vertical rhythm: label · value · full-width sparkline · delta. */
+.pds-scorecard { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.pds-scorecard__label { font-family: var(--font-alt); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.pds-scorecard__value { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--text-title); }
+.pds-scorecard__spark { width: 100%; height: 26px; display: block; }
+
+/* ── EYEBROW ──────────────────────────────────────────────────────────── */
+.pds-eyebrow {
+  font-family: var(--font-alt);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--porter-purple);
+  display: block;
+}
+
+/* ── HEADING ──────────────────────────────────────────────────────────── */
+.pds-heading {
+  font-family: var(--font-display);
+  color: var(--porter-black);
+  margin: 0;
+}
+.pds-heading--display {
+  font-size: clamp(72px, 10vw, 140px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+}
+.pds-heading--h1 {
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -2.5px;
+}
+.pds-heading--h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+.pds-heading strong { color: var(--porter-purple); font-weight: 900; }

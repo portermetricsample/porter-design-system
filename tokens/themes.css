@@ -1,0 +1,141 @@
+/* ============================================================================
+   Porter Metrics — THEME tokens (the 4 official surfaces)
+   ----------------------------------------------------------------------------
+   Single source of truth for the 4 report/dashboard themes. Apply ONE of these
+   on a wrapping element (or <body>):
+
+       <body data-theme="cream">     light · soft paper  (DEFAULT)
+       <body data-theme="white">     light · pure white
+       <body data-theme="blue">      dark  · deep indigo
+       <body data-theme="purple">    dark  · deep purple
+
+   Always paint from these semantic vars — NEVER hard-code a hex in a template.
+   Brand SERIES colors (Meta / Google / Instagram / Shopify) are theme-agnostic
+   and live at the bottom; reuse them verbatim in every theme.
+   Values below are lifted verbatim from the approved reference templates.
+   ============================================================================ */
+
+/* ━━━━━━━━ LIGHT · CREAM (default) ━━━━━━━━ */
+:root,
+[data-theme="cream"] {
+  --surface-bg:     #fdf8f0; /* porter-cream */
+  --surface-card:   #ffffff;
+  --card-border:    #e5e7eb; /* neutral-200 hairline */
+  --text-title:     #1a0340; /* porter-dark */
+  --text-body:      #4a4458; /* ink-soft */
+  --text-muted:     #8b85a0; /* ink-mute */
+  --eyebrow-color:  #6701e6; /* porter-purple */
+  --accent-line:    #6701e6; /* primary chart line */
+  --grid-line:      #ece6f5;
+  --highlight-fill: #9bc400; /* lime-deep — emphasis on light */
+  --area-fill:      #ede9fe; /* fill under chart line */
+  --delta-up:       #0d9488; /* aqua-700 — positive delta on light */
+  --tint-a-bg:#ede9fe; --tint-a-text:#6701e6; /* group A · purple */
+  --tint-b-bg:#ccf5ef; --tint-b-text:#0f766e; /* group B · aqua  */
+  --chip-bg:#ede9fe; --chip-text:#6701e6;     /* pills */
+  --total-accent:#6701e6;                     /* total row / accent column */
+  --btn-outline:#6701e6;                      /* outline/secondary button */
+  --tip-bg:#1a0340; --tip-text:#ffffff; --tip-border:#1a0340; /* dark tooltip on light */
+  --stat-bg:#faf7ff; --stat-border:#d9ccf7; /* tinted stat card — present on light */
+}
+
+/* ━━━━━━━━ LIGHT · WHITE ━━━━━━━━ */
+[data-theme="white"] {
+  --surface-bg:     #ffffff;
+  --surface-card:   #ffffff;
+  --card-border:    #e5e7eb;
+  --text-title:     #1a0340;
+  --text-body:      #4a4458;
+  --text-muted:     #8b85a0;
+  --eyebrow-color:  #6701e6;
+  --accent-line:    #6701e6;
+  --grid-line:      #eef0f3;
+  --highlight-fill: #9bc400;
+  --area-fill:      #ede9fe;
+  --delta-up:       #0d9488;
+  --tint-a-bg:#ede9fe; --tint-a-text:#6701e6;
+  --tint-b-bg:#ccf5ef; --tint-b-text:#0f766e;
+  --chip-bg:#ede9fe; --chip-text:#6701e6;
+  --total-accent:#6701e6;
+  --btn-outline:#6701e6;
+  --tip-bg:#1a0340; --tip-text:#ffffff; --tip-border:#1a0340;
+  --stat-bg:#faf7ff; --stat-border:#d9ccf7;
+}
+
+/* ━━━━━━━━ DARK · BLUE (deep indigo) ━━━━━━━━ */
+[data-theme="blue"] {
+  --surface-bg:     #100225;
+  --surface-card:   #1c0942;
+  --card-border:    rgba(167,139,250,0.16); /* soft lavender hairline — not white */
+  --text-title:     #ffffff;
+  --text-body:      #d9d2ee;
+  --text-muted:     #a79fce;
+  --eyebrow-color:  #a78bfa; /* purple-light */
+  --accent-line:    #a78bfa;
+  --grid-line:      rgba(167,139,250,0.16); /* soft lavender rule — not white, not invisible */
+  --highlight-fill: #cdfb52; /* electric lime — emphasis on dark */
+  --area-fill:      rgba(167,139,250,0.18);
+  --delta-up:       #2dd4bf; /* aqua-400 — positive delta on dark */
+  --tint-a-bg:rgba(167,139,250,0.15); --tint-a-text:#cabdf2;
+  --tint-b-bg:rgba(45,212,191,0.13); --tint-b-text:#76e3d3;
+  --chip-bg:rgba(167,139,250,0.15); --chip-text:#cabdf2;
+  --total-accent:#a78bfa;
+  --btn-outline:#c4b5fd; /* light lavender — reads on dark */
+  --tip-bg:#34206b; --tip-text:#ffffff; --tip-border:rgba(167,139,250,0.42); /* elevated tooltip on dark */
+  --stat-bg:rgba(167,139,250,0.12); --stat-border:rgba(167,139,250,0.30);
+}
+
+/* ━━━━━━━━ DARK · PURPLE (deep purple) ━━━━━━━━ */
+[data-theme="purple"] {
+  --surface-bg:     #1b0e36;
+  --surface-card:   #2a1850;
+  --card-border:    #3d2a5e;
+  --text-title:     #fff8ec; /* warm cream ink */
+  --text-body:      #cdbfe8;
+  --text-muted:     #9c8dc0;
+  --eyebrow-color:  #3fbe86; /* green eyebrow — signature of purple theme */
+  --accent-line:    #b79cf0; /* lavender chart line */
+  --grid-line:      rgba(183,156,240,0.16); /* soft lavender rule */
+  --highlight-fill: #cdfb52;
+  --area-fill:      rgba(138,95,192,0.22);
+  --delta-up:       #2dd4bf;
+  --tint-a-bg:rgba(138,95,192,0.24); --tint-a-text:#dccbf7;
+  --tint-b-bg:rgba(63,190,134,0.16); --tint-b-text:#84ddb2;
+  --chip-bg:rgba(138,95,192,0.24); --chip-text:#dccbf7;
+  --total-accent:#b79cf0;
+  --btn-outline:#d6c7f5; /* light lavender */
+  --tip-bg:#3a2566; --tip-text:#fff8ec; --tip-border:rgba(183,156,240,0.42);
+  --stat-bg:rgba(138,95,192,0.20); --stat-border:rgba(183,156,240,0.32);
+}
+
+/* ━━━━━━━━ BRAND SERIES (theme-agnostic — same in all 4) ━━━━━━━━
+   Use these for data-series swatches/lines so channels read consistently. */
+:root {
+  --series-meta:      #6701e6; /* purple  */
+  --series-google:    #2dd4bf; /* aqua    */
+  --series-instagram: #ec4899; /* pink    */
+  --series-shopify:   #fbbf24; /* yellow  */
+  --series-other:     #1a0340; /* dark    */
+
+  /* ━━━━━━━━ SEQUENTIAL SCALE (heat maps / conditional formatting / choropleth) ━━━━━━━━
+     Light→dark purple ramp. Theme-agnostic: cells stay tinted on any surface. */
+  --heat-1: #f4f0fe; /* lowest  */
+  --heat-2: #ede9fe;
+  --heat-3: #c4b5fd;
+  --heat-4: #8b5cf6;
+  --heat-5: #6701e6;
+  --heat-6: #3a0a80; /* highest */
+
+  /* ━━━━━━━━ DIVERGING SCALE (conditional formatting / stoplight: bad→good) ━━━━━━━━
+     Anchored to brand STATUS colors so "bad" is always cherry (#ec4899) and
+     "good" is always green — consistent with the delta pills used elsewhere.
+     Pastel tints, theme-agnostic (designed on light surfaces). */
+  --cf-1: #f7c7d5; /* worst  · cherry tint  (#ec4899) */
+  --cf-2: #fbdcc4; /* low    · coral-peach */
+  --cf-3: #fcecbf; /* mid    · yellow tint  (#fbbf24) */
+  --cf-4: #dcefb6; /* high   · yellow-green */
+  --cf-5: #bbe6b0; /* best   · green */
+
+  /* ━━━━━━━━ DELTA / TOOLTIP (shared) ━━━━━━━━ */
+  --delta-down: #ec4899; /* porter-pink — negative delta, all themes */
+}

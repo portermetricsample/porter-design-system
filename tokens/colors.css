@@ -1,0 +1,85 @@
+/* ============================================================================
+   Porter Metrics — Color tokens
+   Solid brand colors only. Never gradients. Max 3 colors per surface.
+   ============================================================================ */
+
+:root {
+  /* ━━━━━━━━ CORE BRAND ━━━━━━━━ */
+  --porter-purple: #6701e6; /* primary */
+  --porter-dark:   #1a0340; /* signature dark */
+  --porter-pink:   #ec4899;
+  --porter-yellow: #fbbf24;
+  --porter-aqua:   #2dd4bf;
+  --porter-cream:  #fdf8f0; /* soft paper background */
+  --porter-black:  #0a0a0a;
+  --porter-white:  #ffffff;
+  --porter-muted:  #6b7280; /* secondary text */
+
+  /* ━━━━━━━━ ELECTRIC LIME ACCENT ━━━━━━━━ */
+  --accent:      #cdfb52; /* highlight — best on dark/purple surfaces */
+  --accent-deep: #9bc400; /* pair for text/borders on light surfaces */
+
+  /* ━━━━━━━━ LIME SCALE ━━━━━━━━ */
+  --lime-100: #f2fdcf;
+  --lime-200: #e3fba6;
+  --lime-300: #d6fc73;
+  --lime-400: #cdfb52; /* = --accent */
+  --lime-600: #9bc400; /* = --accent-deep */
+  --lime-700: #7a9b00; /* text on light surfaces */
+
+  /* ━━━━━━━━ INK / JEWEL (refresh text palette) ━━━━━━━━ */
+  --ink:      #1a0340; /* primary text (= porter-dark) */
+  --ink-soft: #4a4458; /* body text, softer */
+  --ink-mute: #8b85a0; /* labels, captions, meta */
+  --jewel:    #6701e6; /* eyebrow / jewel accent (= porter-purple) */
+
+  /* ━━━━━━━━ PURPLES ━━━━━━━━ */
+  --purple-950: #12022f;
+  --purple-900: #1a0340;
+  --purple-800: #3a0a80;
+  --purple-600: #6701e6;
+  --purple-500: #8b5cf6;
+  --purple-300: #c4b5fd;
+  --purple-100: #ede9fe;
+
+  /* ━━━━━━━━ PINKS ━━━━━━━━ */
+  --pink-700: #be185d;
+  --pink-500: #ec4899;
+  --pink-400: #f472b6;
+  --pink-200: #fbcfe8;
+  --pink-100: #fce7f3;
+
+  /* ━━━━━━━━ AQUAS ━━━━━━━━ */
+  --aqua-700: #0d9488;
+  --aqua-500: #14b8a6;
+  --aqua-400: #2dd4bf;
+  --aqua-300: #5eead4;
+  --aqua-200: #99f6e4;
+  --aqua-100: #ccfbf1;
+
+  /* ━━━━━━━━ YELLOWS + NEUTRALS ━━━━━━━━ */
+  --yellow-400: #fbbf24;
+  --yellow-100: #fef3c7;
+  --cream:      #fdf8f0;
+  --neutral-50:  #fafafa;
+  --neutral-200: #e5e7eb;
+  --neutral-950: #0a0a0a;
+
+  /* ━━━━━━━━ SEMANTIC ALIASES ━━━━━━━━ */
+  --text-strong:    var(--porter-black);
+  --text-body:      var(--porter-dark);
+  --text-muted:     var(--porter-muted);
+  --text-on-dark:   var(--porter-white);
+  --text-accent:    var(--porter-purple);
+  --highlight:         var(--accent);      /* positive emphasis on dark */
+  --highlight-on-light: var(--accent-deep); /* same role on light surfaces */
+
+  --surface-page:   var(--porter-white);
+  --surface-paper:  var(--porter-cream);
+  --surface-card:   var(--porter-white);
+  --surface-lavender: var(--purple-100);
+  --surface-dark:   var(--porter-dark);
+  --surface-brand:  var(--porter-purple);
+
+  --border-hairline: var(--neutral-200);
+}

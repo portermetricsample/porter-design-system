@@ -1,9 +1,4 @@
 node_modules/
+.DS_Store
 dist/
-
-# design-sync working dirs
-.ds-sync/
-ds-bundle/
-.design-sync/.cache/
-.design-sync/learnings/
-.design-sync/node_modules
+*.log
