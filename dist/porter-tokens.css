@@ -11,6 +11,9 @@
    This file is GENERATED from tokens/*.css — edit those, then regenerate.
    ============================================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+
 
 /* ===== tokens/colors.css ===== */
 /* ============================================================================
@@ -33,6 +36,11 @@
   /* ━━━━━━━━ ELECTRIC LIME ACCENT ━━━━━━━━ */
   --accent:      #cdfb52; /* highlight — best on dark/purple surfaces */
   --accent-deep: #9bc400; /* pair for text/borders on light surfaces */
+
+  /* ━━━━━━━━ CHART AREA FILL ━━━━━━━━
+     Subtle wash under sparklines / time-series area. color-mix resolves against
+     the in-scope --accent-line, so it tints correctly per theme. */
+  --area-fill: color-mix(in srgb, var(--accent-line, var(--porter-purple)) 14%, transparent);
 
   /* ━━━━━━━━ LIME SCALE ━━━━━━━━ */
   --lime-100: #f2fdcf;
@@ -282,22 +290,23 @@
 /* ===== tokens/typography.css ===== */
 /* ============================================================================
    Porter Metrics — Typography tokens
-   Inter is the protagonist (headlines + body). IBM Plex Mono for eyebrows,
-   badges and meta. Fonts load from Google Fonts at runtime (not self-hosted).
+   Bricolage Grotesque is the protagonist (display/headings/big numbers),
+   Hanken Grotesk for body/labels/meta/legends. IBM Plex Mono (--font-alt) is
+   reserved for badges/chips/code ONLY — never data labels. Inter/IBM Plex Mono
+   are legacy: do not use for new work. Fonts load from Google Fonts at runtime.
    ============================================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
   /* ━━━━━━━━ FAMILIES ━━━━━━━━ */
-  --font-display: 'Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body:    'Hanken Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-alt:     'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --font-mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  /* Refresh pairing — Bricolage (display/headings) + Hanken (body) */
+  /* Brand pairing — Bricolage (display/headings/numbers) + Hanken (body/meta). */
   --font-bricolage: 'Bricolage Grotesque', 'Inter', sans-serif;
   --font-hanken:    'Hanken Grotesk', 'Inter', sans-serif;
+  /* Aliases the .pds-* primitives read — point at the BRAND fonts, not Inter. */
+  --font-display: var(--font-bricolage); /* display, headings, big numbers */
+  --font-body:    var(--font-hanken);    /* body, labels, meta, legends */
+  /* --font-alt / --font-mono: reserved for badges/chips/code ONLY. */
+  --font-alt:     'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
 
   /* ━━━━━━━━ WEIGHTS ━━━━━━━━ */
   --weight-regular: 400;
@@ -513,9 +522,12 @@
 }
 
 /* ── SCORECARD (rhythm) ───────────────────────────────────────────────────
-   Fixed vertical rhythm: label · value · full-width sparkline · delta. */
+   Fixed vertical rhythm: label · value · full-width sparkline · delta.
+   Sparkline = a SMOOTHED, area-filled path (never a raw <polyline>). Drive it
+   with dist/porter-charts.js via data-spark="v,v,…" / PorterCharts.sparkline().
+   ≥5-point guard: under 5 points it renders nothing — show context text. */
 .pds-scorecard { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-.pds-scorecard__label { font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.pds-scorecard__label { font-family: var(--font-alt); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .pds-scorecard__value { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--text-title); }
 .pds-scorecard__spark { width: 100%; height: 26px; display: block; }
 
@@ -527,7 +539,8 @@
 
 /* ── COLUMN / BAR CHART ───────────────────────────────────────────────────
    <div class="pds-bars" style="--chart-h:220px">
-     <div class="pds-bar" style="height:68%"></div> …  (fixed-width, centered)
+     <div class="pds-bar" style="height:68%"></div> …  (48px-wide bars, grouped left)
+   Container is width:max-content — it hugs the bar group, never stretches to fill.
    Labels go in a sibling row with the same gap. */
 .pds-bars { display: flex; align-items: flex-end; gap: 28px; width: max-content; height: var(--chart-h, 220px); }
 .pds-bar  { flex: 0 0 48px; min-height: 3px; background: var(--accent-line); border-radius: 6px 6px 0 0; }
@@ -561,28 +574,30 @@
 .pds-cf--4 { background: var(--cf-4); }
 .pds-cf--5 { background: var(--cf-5); } /* best · green    */
 
-/* ── FUNNEL / CONVERSION PATH (steep-safe) ────────────────────────────────
-   Real ad funnels are steep (Imp→Clicks ~3%); min-width keeps thin stages
-   visible. For very high drop-off, use the stepped variant (stage cards +
-   the rate printed BETWEEN them) rather than width-proportional bars. */
-.pds-funnel { display: flex; flex-direction: column; gap: 12px; }
-/* Steep-safe: label + value go ABOVE the bar, at full width — NEVER inside the bar.
-   Putting text inside the bar overflows on narrow (high-drop-off) stages, which is the
-   common case for real ad funnels (impressions -> clicks can be < 3%). */
+/* ── FUNNEL / CONVERSION PATH ──────────────────────────────────────────────
+   Label + value go ABOVE the bar — NEVER inside it. On steep ad funnels
+   (Impressions→Clicks <3%) text-in-bar overflows the thin fill; min-width does
+   not fix it. The fill shows proportion only.
+   <div class="pds-funnel__stage">
+     <div class="pds-funnel__head"><span class="pds-funnel__name">Clicks</span>
+       <span class="pds-funnel__value">53,400</span></div>
+     <div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:42%"></div></div>
+   </div>
+   Print the step rate (↓ x%) between stages with .pds-funnel__rate. */
+.pds-funnel { display: flex; flex-direction: column; gap: 10px; }
 .pds-funnel__stage { display: flex; flex-direction: column; gap: 6px; }
-.pds-funnel__head { display: flex; justify-content: space-between; align-items: baseline; }
-.pds-funnel__name { font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text-body); }
-.pds-funnel__value { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--text-title); }
-.pds-funnel__track { height: 14px; border-radius: 7px; background: var(--surface-sunken, var(--grid-line)); overflow: hidden; }
-.pds-funnel__fill { height: 100%; border-radius: 7px; background: var(--accent-line); }
-.pds-funnel__rate { font-family: var(--font-body); font-size: 12px; color: var(--text-muted); padding-left: 2px; }
-/* legacy: text-in-bar bar kept only for back-compat; do not use for new funnels */
+.pds-funnel__head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.pds-funnel__name { font-family: var(--font-body); font-weight: 600; color: var(--text-title); }
+.pds-funnel__value { font-family: var(--font-display); font-weight: 700; color: var(--text-title); font-variant-numeric: tabular-nums; }
+.pds-funnel__track { height: 14px; border-radius: 999px; background: var(--surface-sunken, var(--grid-line)); overflow: hidden; }
+.pds-funnel__fill { height: 100%; border-radius: 999px; background: var(--accent-line); min-width: 4px; }
+.pds-funnel__rate { font-family: var(--font-alt); font-size: 12px; color: var(--text-muted); }
+.pds-funnel__step { background: var(--surface-sunken, var(--surface-card)); box-shadow: inset 0 0 0 1px var(--card-border);
+  border-radius: var(--radius-md); padding: 14px 18px; }
+/* LEGACY — text-in-bar. Back-compat only; do NOT emit for new funnels. */
 .pds-funnel__bar { height: 42px; min-width: 72px; background: var(--accent-line);
   border-radius: 8px; display: flex; align-items: center; padding: 0 16px;
   color: #fff; font-family: var(--font-display); font-weight: 700; }
-.pds-funnel__step { background: var(--surface-sunken, var(--surface-card)); box-shadow: inset 0 0 0 1px var(--card-border);
-  border-radius: var(--radius-md); padding: 14px 18px; }
-
 
 /* ── EYEBROW ──────────────────────────────────────────────────────────── */
 .pds-eyebrow {
@@ -621,4 +636,3 @@
   letter-spacing: -1.5px;
 }
 .pds-heading strong { color: var(--porter-purple); font-weight: 900; }
-

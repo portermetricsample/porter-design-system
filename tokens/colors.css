@@ -19,6 +19,11 @@
   --accent:      #cdfb52; /* highlight — best on dark/purple surfaces */
   --accent-deep: #9bc400; /* pair for text/borders on light surfaces */
 
+  /* ━━━━━━━━ CHART AREA FILL ━━━━━━━━
+     Subtle wash under sparklines / time-series area. color-mix resolves against
+     the in-scope --accent-line, so it tints correctly per theme. */
+  --area-fill: color-mix(in srgb, var(--accent-line, var(--porter-purple)) 14%, transparent);
+
   /* ━━━━━━━━ LIME SCALE ━━━━━━━━ */
   --lime-100: #f2fdcf;
   --lime-200: #e3fba6;

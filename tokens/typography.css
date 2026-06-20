@@ -1,7 +1,9 @@
 /* ============================================================================
    Porter Metrics — Typography tokens
-   Inter is the protagonist (headlines + body). IBM Plex Mono for eyebrows,
-   badges and meta. Fonts load from Google Fonts at runtime (not self-hosted).
+   Bricolage Grotesque is the protagonist (display/headings/big numbers),
+   Hanken Grotesk for body/labels/meta/legends. IBM Plex Mono (--font-alt) is
+   reserved for badges/chips/code ONLY — never data labels. Inter/IBM Plex Mono
+   are legacy: do not use for new work. Fonts load from Google Fonts at runtime.
    ============================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
@@ -9,13 +11,15 @@
 
 :root {
   /* ━━━━━━━━ FAMILIES ━━━━━━━━ */
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-alt:     'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --font-mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  /* Refresh pairing — Bricolage (display/headings) + Hanken (body) */
+  /* Brand pairing — Bricolage (display/headings/numbers) + Hanken (body/meta). */
   --font-bricolage: 'Bricolage Grotesque', 'Inter', sans-serif;
   --font-hanken:    'Hanken Grotesk', 'Inter', sans-serif;
+  /* Aliases the .pds-* primitives read — point at the BRAND fonts, not Inter. */
+  --font-display: var(--font-bricolage); /* display, headings, big numbers */
+  --font-body:    var(--font-hanken);    /* body, labels, meta, legends */
+  /* --font-alt / --font-mono: reserved for badges/chips/code ONLY. */
+  --font-alt:     'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
 
   /* ━━━━━━━━ WEIGHTS ━━━━━━━━ */
   --weight-regular: 400;

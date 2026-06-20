@@ -138,7 +138,10 @@
 }
 
 /* ── SCORECARD (rhythm) ───────────────────────────────────────────────────
-   Fixed vertical rhythm: label · value · full-width sparkline · delta. */
+   Fixed vertical rhythm: label · value · full-width sparkline · delta.
+   Sparkline = a SMOOTHED, area-filled path (never a raw <polyline>). Drive it
+   with dist/porter-charts.js via data-spark="v,v,…" / PorterCharts.sparkline().
+   ≥5-point guard: under 5 points it renders nothing — show context text. */
 .pds-scorecard { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .pds-scorecard__label { font-family: var(--font-alt); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .pds-scorecard__value { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--text-title); }
@@ -187,18 +190,30 @@
 .pds-cf--4 { background: var(--cf-4); }
 .pds-cf--5 { background: var(--cf-5); } /* best · green    */
 
-/* ── FUNNEL / CONVERSION PATH (steep-safe) ────────────────────────────────
-   Real ad funnels are steep (Imp→Clicks ~3%); min-width keeps thin stages
-   visible. For very high drop-off, use the stepped variant (stage cards +
-   the rate printed BETWEEN them) rather than width-proportional bars. */
+/* ── FUNNEL / CONVERSION PATH ──────────────────────────────────────────────
+   Label + value go ABOVE the bar — NEVER inside it. On steep ad funnels
+   (Impressions→Clicks <3%) text-in-bar overflows the thin fill; min-width does
+   not fix it. The fill shows proportion only.
+   <div class="pds-funnel__stage">
+     <div class="pds-funnel__head"><span class="pds-funnel__name">Clicks</span>
+       <span class="pds-funnel__value">53,400</span></div>
+     <div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:42%"></div></div>
+   </div>
+   Print the step rate (↓ x%) between stages with .pds-funnel__rate. */
 .pds-funnel { display: flex; flex-direction: column; gap: 10px; }
-.pds-funnel__stage { display: flex; align-items: center; gap: 14px; }
-.pds-funnel__bar { height: 42px; min-width: 72px; background: var(--accent-line);
-  border-radius: 8px; display: flex; align-items: center; padding: 0 16px;
-  color: #fff; font-family: var(--font-display); font-weight: 700; }
+.pds-funnel__stage { display: flex; flex-direction: column; gap: 6px; }
+.pds-funnel__head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.pds-funnel__name { font-family: var(--font-body); font-weight: 600; color: var(--text-title); }
+.pds-funnel__value { font-family: var(--font-display); font-weight: 700; color: var(--text-title); font-variant-numeric: tabular-nums; }
+.pds-funnel__track { height: 14px; border-radius: 999px; background: var(--surface-sunken, var(--grid-line)); overflow: hidden; }
+.pds-funnel__fill { height: 100%; border-radius: 999px; background: var(--accent-line); min-width: 4px; }
 .pds-funnel__rate { font-family: var(--font-alt); font-size: 12px; color: var(--text-muted); }
 .pds-funnel__step { background: var(--surface-sunken, var(--surface-card)); box-shadow: inset 0 0 0 1px var(--card-border);
   border-radius: var(--radius-md); padding: 14px 18px; }
+/* LEGACY — text-in-bar. Back-compat only; do NOT emit for new funnels. */
+.pds-funnel__bar { height: 42px; min-width: 72px; background: var(--accent-line);
+  border-radius: 8px; display: flex; align-items: center; padding: 0 16px;
+  color: #fff; font-family: var(--font-display); font-weight: 700; }
 
 
 /* ── EYEBROW ──────────────────────────────────────────────────────────── */

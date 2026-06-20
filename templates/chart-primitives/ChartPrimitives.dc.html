@@ -10,7 +10,7 @@
 <!-- @template name="Chart & Table Primitives" description="Framework-free, theme-aware copy-paste primitives: bars, breakdown, donut, conditional-format table, steep funnel, sparkline scorecard. All 4 themes." -->
 <helmet>
 <script src="./ds-base.js"></script>
-<script src="../../dist/porter-charts.js" defer></script>
+<script src="../../dist/porter-charts.js"></script>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--surface-bg); color: var(--text-body); font-family: var(--font-hanken, 'Hanken Grotesk', sans-serif); transition: background .2s ease; }
@@ -98,18 +98,35 @@
     <p class="cap">Diverging <code>--cf-1..5</code> (cherry→green) = quality vs target. Data tables carry a <strong>Δ vs prev period</strong> column by default (delta chips). Always dark text on the CF cell.</p>
   </section>
 
+  <!-- TIME SERIES -->
+  <section class="blk">
+    <span class="lbl">Time series · <code>data-series</code> (porter-charts.js)</span>
+    <h2 class="h">Spend over time</h2>
+    <div data-series="118,131,126,149,142,168,159,184,176,203,221,214" style="height:240px;"></div>
+    <p class="cap">Smoothed curve + area fill + dots at the exact data coordinates. Framework-free: <code>PorterCharts.timeseries()</code> or <code>data-series="v,v,…"</code>.</p>
+  </section>
+
   <!-- STEEP FUNNEL -->
   <section class="blk">
-    <span class="lbl">Funnel · <code>.pds-funnel</code> (steep-safe)</span>
+    <span class="lbl">Funnel · <code>.pds-funnel</code> (label-above)</span>
     <h2 class="h">Conversion path</h2>
     <div class="pds-funnel">
-      <div class="pds-funnel__stage"><div class="pds-funnel__head"><span class="pds-funnel__name">Impressions</span><span class="pds-funnel__value">1.84M</span></div><div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:100%;"></div></div></div>
+      <div class="pds-funnel__stage">
+        <div class="pds-funnel__head"><span class="pds-funnel__name">Impressions</span><span class="pds-funnel__value">1.84M</span></div>
+        <div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:100%;"></div></div>
+      </div>
       <div class="pds-funnel__rate">↓ 2.9% click-through</div>
-      <div class="pds-funnel__stage"><div class="pds-funnel__head"><span class="pds-funnel__name">Clicks</span><span class="pds-funnel__value">53,400</span></div><div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:42%; background:var(--cat-2);"></div></div></div>
+      <div class="pds-funnel__stage">
+        <div class="pds-funnel__head"><span class="pds-funnel__name">Clicks</span><span class="pds-funnel__value">53,400</span></div>
+        <div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:42%; background:var(--cat-2);"></div></div>
+      </div>
       <div class="pds-funnel__rate">↓ 4.9% conversion</div>
-      <div class="pds-funnel__stage"><div class="pds-funnel__head"><span class="pds-funnel__name">Conversions</span><span class="pds-funnel__value">2,617</span></div><div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:18%; background:var(--cat-3);"></div></div></div>
+      <div class="pds-funnel__stage">
+        <div class="pds-funnel__head"><span class="pds-funnel__name">Conversions</span><span class="pds-funnel__value">2,617</span></div>
+        <div class="pds-funnel__track"><div class="pds-funnel__fill" style="width:18%; background:var(--cat-3);"></div></div>
+      </div>
     </div>
-    <p class="cap">Label + value sit ABOVE the bar — never inside it (text overflows on thin, high-drop-off stages). The bar shows only proportion. Rate printed between stages.</p>
+    <p class="cap">Label + value sit <strong>above</strong> the bar — never inside it (text-in-bar overflows thin stages). The fill shows proportion only.</p>
   </section>
 
   <!-- SPARKLINE SCORECARD -->
@@ -120,29 +137,35 @@
       <div class="pds-stat-card pds-scorecard">
         <span class="pds-scorecard__label">Spend</span>
         <span class="pds-scorecard__value">$158.9K</span>
-        <svg class="pds-scorecard__spark" data-spark="41,46,44,52,49,58,55,61"></svg>
+        <div class="pds-scorecard__spark" data-spark="121,128,124,139,133,151,147,162"></div>
         <span class="pds-chip pds-chip--pos">▲ 8.2%</span>
       </div>
       <div class="pds-stat-card pds-scorecard">
         <span class="pds-scorecard__label">Cost / conv.</span>
         <span class="pds-scorecard__value">$60.7</span>
-        <svg class="pds-scorecard__spark" data-spark="72,68,70,63,65,58,60,55"></svg>
+        <div class="pds-scorecard__spark" data-spark="78,74,76,69,71,64,66,58"></div>
         <span class="pds-chip pds-chip--pos" style="color:var(--good); background:color-mix(in srgb, var(--good) 15%, transparent);">▼ 17.8% · good</span>
       </div>
       <div class="pds-stat-card pds-scorecard">
         <span class="pds-scorecard__label">ROAS</span>
         <span class="pds-scorecard__value">4.8x</span>
-        <svg class="pds-scorecard__spark" data-spark="48,50,47,49,46,48,45,47"></svg>
+        <div class="pds-scorecard__spark" data-spark="5.1,4.9,5.0,4.7,4.9,4.6,4.8,4.8"></div>
         <span class="pds-chip pds-chip--neg" style="color:var(--bad); background:color-mix(in srgb, var(--bad) 15%, transparent);">▼ 2.1% · bad</span>
       </div>
     </div>
-    <p class="cap">Sparklines are <strong>smoothed + area-filled</strong> via <code>dist/porter-charts.js</code> (<code>data-spark="v,v,…"</code>) — never a raw straight polyline. Needs ≥5 points; for fewer, show context text (e.g. "down from 2.28x") instead of a flat line. Cost-per-conv. ▼ is <code>--good</code> (green); ROAS ▼ is <code>--bad</code> — meaning, not arrow, picks the color.</p>
+    <p class="cap">Sparklines are smoothed + area-filled (<code>data-spark</code>), not raw polylines. Cost-per-conv. ▼ is <code>--good</code> (green); ROAS ▼ is <code>--bad</code> — meaning, not arrow, picks the color. A sparkline with <strong>&lt;5 points renders nothing</strong> (shows <code>data-spark-fallback</code> text) — a 2-point trend is misleading.</p>
   </section>
 
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1080&quot;,&quot;height&quot;:&quot;1400&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cream&quot;,&quot;white&quot;,&quot;blue&quot;,&quot;purple&quot;],&quot;default&quot;:&quot;cream&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
+  componentDidMount() {
+    // Re-scan a few times to settle after React commit / hot-reload churn.
+    // (Real consumers are plain HTML — the lib self-scans there via MutationObserver.)
+    const scan = () => window.PorterCharts && window.PorterCharts.init();
+    [0, 80, 250, 600, 1200].forEach(t => setTimeout(scan, t));
+  }
   renderVals() {
     return { theme: this.props.theme ?? 'cream' };
   }
