@@ -37,6 +37,12 @@
   --btn-outline:#6701e6;                      /* outline/secondary button */
   --tip-bg:#1a0340; --tip-text:#ffffff; --tip-border:#1a0340; /* dark tooltip on light */
   --stat-bg:#faf7ff; --stat-border:#d9ccf7; /* tinted stat card — present on light */
+  --surface-sunken:#f6f1e6;                  /* inset sub-surface, below the card */
+  --good:#0d9488; --bad:#d6155f;             /* MEANING-based (decoupled from arrow) */
+  --callout-info-bg:#ede9fe; --callout-info-tx:#6701e6; /* Insight / Note */
+  --callout-win-bg:#e6f3cd;  --callout-win-tx:#5e7c00;  /* Win */
+  --callout-warn-bg:#fcecbf; --callout-warn-tx:#8a5a00; /* Watch out */
+  --callout-risk-bg:#fbd3e1; --callout-risk-tx:#be205f; /* Risk */
 }
 
 /* ━━━━━━━━ LIGHT · WHITE ━━━━━━━━ */
@@ -60,6 +66,12 @@
   --btn-outline:#6701e6;
   --tip-bg:#1a0340; --tip-text:#ffffff; --tip-border:#1a0340;
   --stat-bg:#faf7ff; --stat-border:#d9ccf7;
+  --surface-sunken:#f6f4fb;
+  --good:#0d9488; --bad:#d6155f;
+  --callout-info-bg:#ede9fe; --callout-info-tx:#6701e6;
+  --callout-win-bg:#e6f3cd;  --callout-win-tx:#5e7c00;
+  --callout-warn-bg:#fcecbf; --callout-warn-tx:#8a5a00;
+  --callout-risk-bg:#fbd3e1; --callout-risk-tx:#be205f;
 }
 
 /* ━━━━━━━━ DARK · BLUE (deep indigo) ━━━━━━━━ */
@@ -83,6 +95,13 @@
   --btn-outline:#c4b5fd; /* light lavender — reads on dark */
   --tip-bg:#34206b; --tip-text:#ffffff; --tip-border:rgba(167,139,250,0.42); /* elevated tooltip on dark */
   --stat-bg:rgba(167,139,250,0.12); --stat-border:rgba(167,139,250,0.30);
+  --surface-sunken:rgba(255,255,255,0.04);
+  --good:#2dd4bf; --bad:#f472b6;
+  --delta-down:#f472b6;                      /* brighter pink — reads on dark */
+  --callout-info-bg:rgba(167,139,250,0.16); --callout-info-tx:#cabdf2;
+  --callout-win-bg:rgba(63,190,134,0.18);   --callout-win-tx:#8fe3b6;
+  --callout-warn-bg:rgba(251,191,36,0.16);  --callout-warn-tx:#f4cd7a;
+  --callout-risk-bg:rgba(236,72,153,0.18);  --callout-risk-tx:#f9a8cf;
 }
 
 /* ━━━━━━━━ DARK · PURPLE (deep purple) ━━━━━━━━ */
@@ -106,6 +125,13 @@
   --btn-outline:#d6c7f5; /* light lavender */
   --tip-bg:#3a2566; --tip-text:#fff8ec; --tip-border:rgba(183,156,240,0.42);
   --stat-bg:rgba(138,95,192,0.20); --stat-border:rgba(183,156,240,0.32);
+  --surface-sunken:rgba(255,255,255,0.045);
+  --good:#2dd4bf; --bad:#f472b6;
+  --delta-down:#f472b6;
+  --callout-info-bg:rgba(138,95,192,0.24); --callout-info-tx:#dccbf7;
+  --callout-win-bg:rgba(63,190,134,0.18);  --callout-win-tx:#8fe3b6;
+  --callout-warn-bg:rgba(251,191,36,0.16); --callout-warn-tx:#f4cd7a;
+  --callout-risk-bg:rgba(236,72,153,0.20); --callout-risk-tx:#f9a8cf;
 }
 
 /* ━━━━━━━━ BRAND SERIES (theme-agnostic — same in all 4) ━━━━━━━━
@@ -116,6 +142,15 @@
   --series-instagram: #ec4899; /* pink    */
   --series-shopify:   #fbbf24; /* yellow  */
   --series-other:     #1a0340; /* dark    */
+
+  /* ━━━━━━━━ CATEGORICAL SEQUENCE (non-channel dims: device / geo / product) ━━━━━━━━
+     Use when a breakdown ISN'T by channel. Saturated, legible on light AND dark. */
+  --cat-1: #6701e6; /* purple */
+  --cat-2: #2dd4bf; /* aqua   */
+  --cat-3: #fbbf24; /* yellow */
+  --cat-4: #ec4899; /* pink   */
+  --cat-5: #9bc400; /* lime   */
+  --cat-6: #8b5cf6; /* violet */
 
   /* ━━━━━━━━ SEQUENTIAL SCALE (heat maps / conditional formatting / choropleth) ━━━━━━━━
      Light→dark purple ramp. Theme-agnostic: cells stay tinted on any surface. */

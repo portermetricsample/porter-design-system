@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Chart & Table Primitives" description="Framework-free, theme-aware copy-paste primitives: bars, breakdown, donut, conditional-format table, steep funnel, sparkline scorecard. All 4 themes." -->
+<helmet>
+<script src="./ds-base.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface-bg); color: var(--text-body); font-family: var(--font-hanken, 'Hanken Grotesk', sans-serif); transition: background .2s ease; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 32px 96px; }
+  .blk { background: var(--surface-card); border-radius: var(--radius-xl, 20px); padding: 28px 30px; box-shadow: inset 0 0 0 1px var(--card-border); margin-bottom: 22px; }
+  .lbl { font-family: var(--font-bricolage, 'Bricolage Grotesque', sans-serif); font-weight: 600; font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--eyebrow-color); display: block; margin-bottom: 6px; }
+  .h { font-family: var(--font-bricolage, sans-serif); font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--text-title); margin: 0 0 22px; }
+  .cap { font-family: var(--font-hanken, sans-serif); font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+  /* Cards that hug their chart: the caption fills the resolved width but never expands it */
+  .blk--fit { width: fit-content; }
+  .blk--fit .cap { width: 0; min-width: 100%; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--font-hanken, sans-serif); }
+  th { font-family: var(--font-hanken, sans-serif); font-weight: 600; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); text-align: right; padding: 0 0 12px; }
+  th:first-child { text-align: left; }
+  td { padding: 11px 0; color: var(--text-body); text-align: right; border-top: 1px solid var(--card-border); }
+  td:first-child { text-align: left; font-weight: 600; color: var(--text-title); }
+  .barlabels { display: flex; gap: 28px; width: max-content; margin-top: 10px; }
+  .barlabels span { flex: 0 0 48px; text-align: center; font-family: var(--font-hanken, sans-serif); font-size: 12px; color: var(--text-muted); }
+  .pds-breakdown__row { font-family: var(--font-hanken, sans-serif); }
+</style>
+</helmet>
+<div class="wrap" data-theme="{{ theme }}">
+
+  <div style="margin-bottom:28px;">
+    <span class="lbl" style="color:var(--eyebrow-color);">Porter Design System</span>
+    <h1 style="font-family:var(--font-bricolage,sans-serif); font-weight:800; font-size:40px; letter-spacing:-1.2px; color:var(--text-title); margin:0;">Chart &amp; table primitives</h1>
+    <p style="font-family:var(--font-hanken,sans-serif); color:var(--text-muted); font-size:15px; max-width:560px;">Framework-free, theme-aware, copy-paste. Static scaffold in <code>.pds-*</code> classes; per-datum values inline. Switch theme in Tweaks — every primitive re-skins with one attribute.</p>
+  </div>
+
+  <!-- COLUMN / BAR CHART -->
+  <section class="blk blk--fit">
+    <span class="lbl">Column chart · <code>.pds-bars / .pds-bar</code></span>
+    <h2 class="h">Weekly spend</h2>
+    <div class="pds-bars" style="--chart-h:200px;">
+      <div class="pds-bar" style="height:64%;"></div>
+      <div class="pds-bar" style="height:78%;"></div>
+      <div class="pds-bar" style="height:71%;"></div>
+      <div class="pds-bar" style="height:92%;"></div>
+    </div>
+    <div class="barlabels"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+    <p class="cap">Fixed 48px bars, grouped left at a fixed gap (width = content). Heights set inline as % — never <code>flex:1</code>.</p>
+  </section>
+
+  <!-- HORIZONTAL BREAKDOWN -->
+  <section class="blk">
+    <span class="lbl">Breakdown bars · <code>.pds-breakdown</code></span>
+    <h2 class="h">Spend by device</h2>
+    <div class="pds-breakdown">
+      <div class="pds-breakdown__row"><span>Mobile</span><div class="pds-breakdown__track"><div class="pds-breakdown__fill" style="width:62%;"></div></div><span>62%</span></div>
+      <div class="pds-breakdown__row"><span>Desktop</span><div class="pds-breakdown__track"><div class="pds-breakdown__fill" style="width:29%; background:var(--cat-2);"></div></div><span>29%</span></div>
+      <div class="pds-breakdown__row"><span>Tablet</span><div class="pds-breakdown__track"><div class="pds-breakdown__fill" style="width:9%; background:var(--cat-3);"></div></div><span>9%</span></div>
+    </div>
+    <p class="cap">Non-channel dimension → categorical <code>--cat-1..6</code>, not the brand series.</p>
+  </section>
+
+  <!-- DONUT -->
+  <section class="blk blk--fit">
+    <span class="lbl">Donut · <code>.pds-donut</code> (conic-gradient)</span>
+    <h2 class="h">Spend share by channel</h2>
+    <div style="display:flex; align-items:center; justify-content:center; gap:48px; flex-wrap:wrap;">
+      <div class="pds-donut" style="--donut-size:170px; background:conic-gradient(var(--series-meta) 0 52%, var(--series-google) 52% 78%, var(--series-shopify) 78% 92%, var(--series-other) 92% 100%);"></div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-family:var(--font-hanken,sans-serif); font-size:14px; color:var(--text-body); white-space:nowrap;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:12px; height:12px; border-radius:3px; background:var(--series-meta);"></span>Meta · 52%</div>
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:12px; height:12px; border-radius:3px; background:var(--series-google);"></span>Google · 26%</div>
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:12px; height:12px; border-radius:3px; background:var(--series-shopify);"></span>Shopify · 14%</div>
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:12px; height:12px; border-radius:3px; background:var(--series-other);"></span>Other · 8%</div>
+      </div>
+    </div>
+    <p class="cap">Segment stops set inline. No SVG dasharray math; the mask cuts the hole.</p>
+  </section>
+
+  <!-- CONDITIONAL-FORMAT TABLE -->
+  <section class="blk">
+    <span class="lbl">Conditional format · <code>.pds-cf</code> (diverging ramp)</span>
+    <h2 class="h">ROAS by campaign</h2>
+    <table>
+      <thead><tr><th>Campaign</th><th>Spend</th><th>Δ vs prev</th><th>ROAS</th></tr></thead>
+      <tbody>
+        <tr><td>Brand — Exact</td><td>$9,240</td><td><span class="pds-chip pds-chip--pos">▲ 12.4%</span></td><td style="border-top:none; padding:8px 0 8px 16px; width:110px;"><span class="pds-cf pds-cf--5" style="display:block;">6.8x</span></td></tr>
+        <tr><td>Spring Sale</td><td>$12,480</td><td><span class="pds-chip pds-chip--pos">▲ 3.1%</span></td><td style="border-top:none; padding:8px 0 8px 16px;"><span class="pds-cf pds-cf--4" style="display:block;">5.2x</span></td></tr>
+        <tr><td>Retargeting</td><td>$6,820</td><td><span class="pds-chip pds-chip--neg">▼ 8.7%</span></td><td style="border-top:none; padding:8px 0 8px 16px;"><span class="pds-cf pds-cf--3" style="display:block;">4.1x</span></td></tr>
+        <tr><td>Generic — Broad</td><td>$3,200</td><td><span class="pds-chip pds-chip--neg">▼ 21.0%</span></td><td style="border-top:none; padding:8px 0 8px 16px;"><span class="pds-cf pds-cf--1" style="display:block;">2.9x</span></td></tr>
+      </tbody>
+    </table>
+    <p class="cap">Diverging <code>--cf-1..5</code> (cherry→green) = quality vs target. Data tables carry a <strong>Δ vs prev period</strong> column by default (delta chips). Always dark text on the CF cell.</p>
+  </section>
+
+  <!-- STEEP FUNNEL -->
+  <section class="blk">
+    <span class="lbl">Funnel · <code>.pds-funnel</code> (steep-safe)</span>
+    <h2 class="h">Conversion path</h2>
+    <div class="pds-funnel">
+      <div class="pds-funnel__stage"><div class="pds-funnel__bar" style="width:100%;">Impressions · 1.84M</div></div>
+      <div class="pds-funnel__rate">↓ 2.9% click-through</div>
+      <div class="pds-funnel__stage"><div class="pds-funnel__bar" style="width:42%; background:var(--cat-2);">Clicks · 53,400</div></div>
+      <div class="pds-funnel__rate">↓ 4.9% conversion</div>
+      <div class="pds-funnel__stage"><div class="pds-funnel__bar" style="width:18%; background:var(--cat-3); color:var(--porter-dark);">Conversions · 2,617</div></div>
+    </div>
+    <p class="cap">Real ad funnels are steep — <code>min-width:72px</code> keeps thin stages visible. Rate printed between stages.</p>
+  </section>
+
+  <!-- SPARKLINE SCORECARD -->
+  <section class="blk">
+    <span class="lbl">Scorecard + sparkline · <code>.pds-scorecard</code></span>
+    <h2 class="h">KPIs at a glance</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+      <div class="pds-stat-card pds-scorecard">
+        <span class="pds-scorecard__label">Spend</span>
+        <span class="pds-scorecard__value">$158.9K</span>
+        <svg class="pds-scorecard__spark" viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,20 14,16 28,18 42,10 56,13 70,6 84,9 100,4" fill="none" stroke="var(--accent-line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+        <span class="pds-chip pds-chip--pos">▲ 8.2%</span>
+      </div>
+      <div class="pds-stat-card pds-scorecard">
+        <span class="pds-scorecard__label">Cost / conv.</span>
+        <span class="pds-scorecard__value">$60.7</span>
+        <svg class="pds-scorecard__spark" viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,6 14,9 28,7 42,12 56,11 70,16 84,15 100,20" fill="none" stroke="var(--accent-line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+        <span class="pds-chip pds-chip--pos" style="color:var(--good); background:color-mix(in srgb, var(--good) 15%, transparent);">▼ 17.8% · good</span>
+      </div>
+      <div class="pds-stat-card pds-scorecard">
+        <span class="pds-scorecard__label">ROAS</span>
+        <span class="pds-scorecard__value">4.8x</span>
+        <svg class="pds-scorecard__spark" viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,8 14,7 28,11 42,9 56,14 70,12 84,17 100,15" fill="none" stroke="var(--accent-line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+        <span class="pds-chip pds-chip--neg" style="color:var(--bad); background:color-mix(in srgb, var(--bad) 15%, transparent);">▼ 2.1% · bad</span>
+      </div>
+    </div>
+    <p class="cap">Cost-per-conv. ▼ is <code>--good</code> (green); ROAS ▼ is <code>--bad</code> — meaning, not arrow, picks the color.</p>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1080&quot;,&quot;height&quot;:&quot;1400&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cream&quot;,&quot;white&quot;,&quot;blue&quot;,&quot;purple&quot;],&quot;default&quot;:&quot;cream&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { theme: this.props.theme ?? 'cream' };
+  }
+}
+</script>
+</body>
+</html>

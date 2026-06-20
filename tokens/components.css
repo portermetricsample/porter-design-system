@@ -144,6 +144,63 @@
 .pds-scorecard__value { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--text-title); }
 .pds-scorecard__spark { width: 100%; height: 26px; display: block; }
 
+/* ════════════════════════════════════════════════════════════════════════
+   CHART & TABLE PRIMITIVES — framework-free, theme-aware, copy-paste.
+   Static scaffolds in CSS; per-datum values go inline (height/width %, conic
+   stops). Paint only from theme tokens so all 4 themes work automatically.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── COLUMN / BAR CHART ───────────────────────────────────────────────────
+   <div class="pds-bars" style="--chart-h:220px">
+     <div class="pds-bar" style="height:68%"></div> …  (48px-wide bars, grouped left)
+   Container is width:max-content — it hugs the bar group, never stretches to fill.
+   Labels go in a sibling row with the same gap. */
+.pds-bars { display: flex; align-items: flex-end; gap: 28px; width: max-content; height: var(--chart-h, 220px); }
+.pds-bar  { flex: 0 0 48px; min-height: 3px; background: var(--accent-line); border-radius: 6px 6px 0 0; }
+.pds-bar--alt { background: var(--cat-2); }
+
+/* ── HORIZONTAL BREAKDOWN BARS ────────────────────────────────────────────
+   <div class="pds-breakdown__row"><span>Label</span>
+     <div class="pds-breakdown__track"><div class="pds-breakdown__fill" style="width:72%"></div></div>
+     <span>72%</span></div> */
+.pds-breakdown { display: flex; flex-direction: column; gap: 14px; }
+.pds-breakdown__row { display: grid; grid-template-columns: 130px 1fr auto; align-items: center; gap: 14px; font-family: var(--font-body); color: var(--text-body); }
+.pds-breakdown__track { height: 10px; border-radius: 999px; background: var(--surface-sunken, var(--grid-line)); overflow: hidden; }
+.pds-breakdown__fill  { height: 100%; border-radius: 999px; background: var(--accent-line); }
+
+/* ── DONUT (conic-gradient — no SVG dasharray math) ────────────────────────
+   <div class="pds-donut" style="background:conic-gradient(
+        var(--series-meta) 0 52%, var(--series-google) 52% 78%, var(--series-shopify) 78% 100%)"></div>
+   The mask cuts the hole; set segment stops inline. */
+.pds-donut { width: var(--donut-size, 160px); aspect-ratio: 1; border-radius: 50%;
+  -webkit-mask: radial-gradient(circle, transparent 56%, #000 57%);
+          mask: radial-gradient(circle, transparent 56%, #000 57%); }
+
+/* ── CONDITIONAL-FORMAT (STOPLIGHT) CELL ──────────────────────────────────
+   Uses the DIVERGING ramp (bad→good). Pastel tints always carry DARK text
+   (the ramp is light on every theme — this is the documented assumption). */
+.pds-cf { font-family: var(--font-alt); font-weight: 700; text-align: center;
+  padding: 8px 12px; border-radius: 8px; color: var(--porter-dark); }
+.pds-cf--1 { background: var(--cf-1); } /* worst · cherry  */
+.pds-cf--2 { background: var(--cf-2); }
+.pds-cf--3 { background: var(--cf-3); } /* mid · yellow   */
+.pds-cf--4 { background: var(--cf-4); }
+.pds-cf--5 { background: var(--cf-5); } /* best · green    */
+
+/* ── FUNNEL / CONVERSION PATH (steep-safe) ────────────────────────────────
+   Real ad funnels are steep (Imp→Clicks ~3%); min-width keeps thin stages
+   visible. For very high drop-off, use the stepped variant (stage cards +
+   the rate printed BETWEEN them) rather than width-proportional bars. */
+.pds-funnel { display: flex; flex-direction: column; gap: 10px; }
+.pds-funnel__stage { display: flex; align-items: center; gap: 14px; }
+.pds-funnel__bar { height: 42px; min-width: 72px; background: var(--accent-line);
+  border-radius: 8px; display: flex; align-items: center; padding: 0 16px;
+  color: #fff; font-family: var(--font-display); font-weight: 700; }
+.pds-funnel__rate { font-family: var(--font-alt); font-size: 12px; color: var(--text-muted); }
+.pds-funnel__step { background: var(--surface-sunken, var(--surface-card)); box-shadow: inset 0 0 0 1px var(--card-border);
+  border-radius: var(--radius-md); padding: 14px 18px; }
+
+
 /* ── EYEBROW ──────────────────────────────────────────────────────────── */
 .pds-eyebrow {
   font-family: var(--font-alt);
