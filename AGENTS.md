@@ -116,14 +116,14 @@ Use for data-series swatches/lines so channels read consistently everywhere:
 **More primitives:**
 - `.pds-tag` — in-cell chip for tables (campaign names, match types). Same tokens as `.pds-chip--neutral`.
 - `.pds-stat-card` — tinted KPI/creative card, theme-aware (`--stat-bg`/`--stat-border`); has presence on light AND dark (no washed pastel).
-- `.pds-scorecard` (+ `__label`/`__value`/`__spark`) — fixed scorecard rhythm: label · value · full-width sparkline · delta.
+- `.pds-scorecard` (+ `__label`/`__value`/`__spark`) — fixed scorecard rhythm: label · value · full-width sparkline · delta. The `__spark` SVG must be **smoothed + area-filled** (render it with `PorterCharts.sparkline()` / `data-spark`), never a raw straight `<polyline>` (reads jagged and flat). A sparkline needs **≥5 points**; with fewer (e.g. a 2-point month-over-month), drop the sparkline and put context text in its place (e.g. "down from 2.28x in April") — a 2-point line is a misleading flat diagonal.
 
-**Chart & table primitives** (framework-free, theme-aware — work via `dist/porter-tokens.css`, no JS). Static scaffold in CSS; per-datum values go inline:
+**Chart & table primitives** (theme-aware — scaffold via `dist/porter-tokens.css`). Most are CSS-only; the two curve charts (sparkline, time-series) need path math, so load the optional **`dist/porter-charts.js`** (framework-free, no deps) and use `data-spark` / `data-series` or `PorterCharts.sparkline()/.timeseries()`. All primitives now paint in the **brand fonts** — `--font-display`→Bricolage, `--font-body`→Hanken (the legacy Inter/`--font-alt` mono are NOT used by primitives). Static scaffold in CSS; per-datum values go inline:
 - `.pds-bars` + `.pds-bar` — column chart, fixed 48px bars, centered. Heights inline (`style="height:68%"`); chart height via `--chart-h`.
 - `.pds-breakdown` (`__row`/`__track`/`__fill`) — horizontal breakdown bars; fill width inline.
 - `.pds-donut` — donut via **`conic-gradient`** set inline (no SVG dasharray math); mask cuts the hole. Segments use §5 series or `--cat-*`.
 - `.pds-cf` + `--1..5` — conditional-format (stoplight) cell on the **diverging** `--cf-*` ramp; always dark text (ramp is light on every theme).
-- `.pds-funnel` (`__bar`/`__rate`/`__step`) — **steep-safe** funnel: `min-width:72px` keeps thin stages visible; for high drop-off use the stepped `__step` cards with the rate printed between them.
+- `.pds-funnel` (`__stage` › `__head` [`__name`+`__value`] + `__track` › `__fill`, with `__rate` between) — **steep-safe** funnel: the label + value sit **ABOVE** the bar, never inside it. Putting text inside the bar overflows on thin, high-drop-off stages (the common ad case — impressions→clicks can be <3%); the `__fill` shows proportion only. (`__bar` is legacy/back-compat — don't use it for new funnels.)
 
 **Geo maps:** the kit ships a **US-states** tile-grid only. For non-US geography (e.g. Canadian provinces) there is **no map primitive yet** — fall back to a horizontal breakdown bar chart (`.pds-breakdown`) by region and add a one-line methodology note. Don't fake a US map for non-US data.
 
