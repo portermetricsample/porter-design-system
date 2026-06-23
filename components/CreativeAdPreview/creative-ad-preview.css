@@ -1,0 +1,91 @@
+/* ============================================================================
+   Porter Design — Creative Ad Preview skin (the "Google ad" look)
+   Styles the .cap-* class hooks emitted by porter-reporting
+   (components/google-ads/creative-ad-preview). Tokens-only, theme-aware.
+
+   ONE labeled exception to "never hardcode a hex": --gad-* are the Google
+   ad-FORMAT convention colors (the recognizable ad-title blue), treated like a
+   brand-series color so the preview reads as a real Google ad. Everything else
+   resolves from porter-design tokens (themes.css) and adapts to all 4 themes.
+   ============================================================================ */
+
+:root, [data-theme] { --gad-title: #1a0dab; }          /* Google ad-title blue (light SERP) */
+[data-theme="blue"], [data-theme="purple"] { --gad-title: #8ab4f8; }  /* dark-mode Google blue */
+
+.cap-component { display: block; font-family: var(--font-hanken); color: var(--text-body); margin: 0 0 var(--space-5); }
+
+/* ── ad-level meta row ─────────────────────────────────────────────────── */
+.cap-admeta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; font-size: 12px; }
+.cap-where { color: var(--text-muted); margin-right: auto; font-family: var(--font-hanken); }
+.cap-strength, .cap-seg { font-size: 11px; padding: 2px 9px; border-radius: var(--radius-pill); white-space: nowrap; }
+.cap-strength { color: var(--ink, #1a0340); }
+.cap-strength--excellent { background: var(--cf-5); }
+.cap-strength--good      { background: var(--cf-4); }
+.cap-strength--average   { background: var(--cf-3); }
+.cap-strength--poor      { background: var(--cf-1); }
+.cap-strength--unknown, .cap-strength--pending { background: var(--card-border); color: var(--text-muted); }
+.cap-seg { background: transparent; border: 1px solid currentColor; }
+.cap-seg--brand { color: var(--cat-1); }
+.cap-seg--competitor_conquest { color: var(--cat-2); }
+.cap-seg--generic { color: var(--cat-3); }
+.cap-seg--unknown { color: var(--text-muted); }
+
+/* ── the card + the Google-ad frame ────────────────────────────────────── */
+.cap-card { background: var(--surface-card); border: 1px solid var(--card-border); border-radius: var(--radius-xl); padding: var(--space-5); }
+.cap-ad { background: var(--surface-card); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: var(--space-4); max-width: 600px; }
+.cap-head { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; }
+.cap-fav { width: 26px; height: 26px; border-radius: var(--radius-pill); background: var(--surface-sunken, rgba(120,120,140,.08)); color: var(--text-title); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+.cap-id { line-height: 1.2; }
+.cap-biz { display: block; font-size: 13px; color: var(--text-title); font-weight: 600; }
+.cap-url { display: block; font-size: 12px; color: var(--text-muted); }
+.cap-spon { color: var(--text-title); font-weight: 600; }
+.cap-title { color: var(--gad-title); font-size: 19px; line-height: 1.3; margin: 2px 0 4px; }
+.cap-sep { color: var(--text-muted); font-weight: 400; }
+.cap-desc { font-size: 13px; color: var(--text-body); line-height: 1.5; margin: 0 0 8px; }
+.cap-sitelinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 2px 0 8px; }
+.cap-slink { color: var(--gad-title); font-size: 13px; cursor: pointer; text-decoration: none; }
+.cap-slink:hover { text-decoration: underline; }
+.cap-callouts { font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 8px; }
+
+/* ── annotation legend ─────────────────────────────────────────────────── */
+.cap-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 12px 0; font-size: 11px; color: var(--text-muted); }
+.cap-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ── the annotated asset pool ──────────────────────────────────────────── */
+.cap-pool { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 6px; }
+.cap-group-label { font-size: 12px; color: var(--text-muted); font-weight: 600; margin: 0 0 8px; }
+.cap-chips { display: flex; flex-direction: column; gap: 6px; }
+.cap-chip { display: flex; align-items: center; gap: 8px; background: var(--surface-sunken, rgba(120,120,140,.05)); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 7px 10px; font-size: 13px; line-height: 1.3; }
+.cap-chip--unserved { opacity: .5; }
+.cap-chip--disapproved { border-color: var(--bad); }
+.cap-chip-text { flex: 1; color: var(--text-title); }
+.cap-meta { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+.cap-char--ok { color: var(--text-muted); }
+.cap-char--under { color: var(--callout-warn-tx, #9a6b00); }
+.cap-char--over { color: var(--bad); }
+.cap-impr { color: var(--text-muted); }
+
+/* markers (glyphs are drawn here, in Design — Reporting only emits the hook) */
+.cap-pin { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; font-size: 10px; font-weight: 700; border-radius: var(--radius-sm); background: var(--porter-purple); color: #fff; }
+.cap-dki { font-family: var(--font-mono, ui-monospace, monospace); color: var(--accent-deep, #9bc400); font-size: 12px; }
+.cap-dki::before { content: "{ }"; }
+.cap-warn { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: var(--radius-pill); background: var(--bad); color: #fff; font-size: 10px; font-weight: 700; }
+.cap-warn::before { content: "!"; }
+
+/* ── spotlights — high-impact fixes only (renders the metric-levers ACT-ON set) ─── */
+.cap-spotlights { margin: 14px 0 4px; padding: var(--space-4); background: var(--surface-sunken, rgba(120,120,140,.05)); border: 1px solid var(--card-border); border-radius: var(--radius-md); }
+.cap-spot { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; padding: 6px 0; border-top: 1px solid var(--card-border); font-size: 13px; }
+.cap-spot:first-of-type { border-top: 0; }
+.cap-spot-issue { flex: 1 1 200px; color: var(--text-title); }
+.cap-spot-metric { font-size: 11px; font-weight: 600; color: var(--eyebrow-color); white-space: nowrap; }
+.cap-spot-fix { flex: 1 1 100%; font-size: 12px; color: var(--text-muted); }
+.cap-spot--clean { color: var(--text-muted); border-top: 0; }
+
+/* ── extensions summary + states ───────────────────────────────────────── */
+.cap-ext { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.cap-ext-chip { font-size: 11px; color: var(--text-muted); background: var(--surface-sunken, rgba(120,120,140,.05)); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 4px 8px; }
+.cap-coverage, .cap-empty { color: var(--text-muted); font-size: 13px; padding: var(--space-4); }
+
+.cap-gallery { display: grid; gap: var(--space-5); }
+
+@media (max-width: 640px) { .cap-pool { grid-template-columns: 1fr; } }
